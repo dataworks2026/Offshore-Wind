@@ -1,0 +1,28 @@
+=== Prompt Skeleton ===
+
+[System Instructions]
+Paste `instructions/system_instructions.txt` verbatim here.
+
+[Case Context]
+- Inline the full contents of the target case's `case.yaml`.
+- List cue bullets as provided in the case folder.
+
+[Retrieved Knowledge Passages]
+- Insert 2-4 relevant passages copied from `/knowledge/...` files.
+- Preserve `### [passage_id]` anchors to enable citation.
+
+[Additional Notes]
+- Summarize any advisor clarifications or sprint-specific acceptance criteria.
+- Enumerate assumptions the model is allowed to make.
+
+[Output Schema]
+```
+(paste the entire contents of `schema/output_schema.json` here)
+```
+
+[Completion Instructions]
+1. Produce a JSON object that exactly matches the schema above.
+2. Include `passage_id` references for every factual statement.
+3. Provide risk forecasts for 30/90/180/365 days with maintenance windows respecting monotonicity.
+4. After the JSON, write a `readout.md` section following `reports/readout_template.md`.
+

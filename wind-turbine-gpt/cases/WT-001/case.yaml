@@ -1,0 +1,19 @@
+case_id: WT-001
+inspection_date: 2025-01-15
+site: "Example Site"
+turbine:
+  model: "V126"
+  rotor_diam_m: 126
+  materials: ["FRP"]
+environment: ["onshore","cold_weather"]
+inspection:
+  method: "drone"
+  distance_m: 12
+cues:
+  - "Longitudinal crack ~0.8m near trailing edge; exposed fibers"
+  - "Leading-edge erosion visible at 30–40% span"
+  - "No icing present"
+images:
+  - path: "./images/wt001_1.jpg"
+  - path: "./images/wt001_2.jpg"
+notes: "Placeholder case for testing"
