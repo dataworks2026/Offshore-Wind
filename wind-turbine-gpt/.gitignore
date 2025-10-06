@@ -1,0 +1,22 @@
+# Text-focused repository ignores
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+*.swo
+*.log
+*.bak
+__pycache__/
+.idea/
+.vscode/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.tif
+*.tiff
+*.bmp
+*.zip
+*.tar
+*.tar.gz
+*.rar

@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WindTurbineAssessment",
+  "type": "object",
+  "required": ["case_id","component","candidate_damages","final_assessment","forecast","limitations","calibration_note"],
+  "properties": {
+    "case_id": {"type": "string"},
+    "component": {"type": "string", "enum": ["blade","hub","nacelle","tower","bop"]},
+    "candidate_damages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type","prob","severity","recommended_action","evidence","time_horizon_days","assumptions"],
+        "properties": {
+          "type": {"type": "string"},
+          "prob": {"type": "number", "minimum": 0, "maximum": 1},
+          "severity": {"type": "string", "enum": ["S0","S1","S2","S3","S4"]},
+          "recommended_action": {"type": "string", "enum": ["monitor","clean_treat","field_repair","factory_repair","replace","shutdown","ndt"]},
+          "time_horizon_days": {"type": "integer", "minimum": 0},
+          "assumptions": {"type": "array", "items": {"type": "string"}},
+          "evidence": {
+            "type": "object",
+            "required": ["visual_cues","passage_ids"],
+            "properties": {
+              "visual_cues": {"type": "array","items":{"type":"string"}},
+              "passage_ids": {"type": "array","items":{"type":"string"}}
+            }
+          }
+        }
+      }
+    },
+    "final_assessment": {
+      "type": "object",
+      "required": ["primary_type","primary_prob","severity","rationale","limitations","calibration_note"],
+      "properties": {
+        "primary_type": {"type":"string"},
+        "primary_prob": {"type":"number","minimum":0,"maximum":1},
+        "severity": {"type":"string","enum":["S0","S1","S2","S3","S4"]},
+        "rationale": {"type":"string"},
+        "limitations": {"type":"array","items":{"type":"string"}},
+        "calibration_note": {"type":"string"}
+      }
+    },
+    "forecast": {
+      "type":"object",
+      "required": ["risk_30d","risk_90d","risk_180d","risk_365d","recommended_maintenance_window","assumptions"],
+      "properties": {
+        "risk_30d":{"type":"number","minimum":0,"maximum":1},
+        "risk_90d":{"type":"number","minimum":0,"maximum":1},
+        "risk_180d":{"type":"number","minimum":0,"maximum":1},
+        "risk_365d":{"type":"number","minimum":0,"maximum":1},
+        "recommended_maintenance_window":{"type":"string"},
+        "assumptions":{"type":"array","items":{"type":"string"}}
+      }
+    },
+    "limitations": {"type":"array","items":{"type":"string"}},
+    "calibration_note": {"type":"string"}
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "component": "blade",
+  "type": "leading_edge_erosion",
+  "severity": "S2",
+  "action": "field_repair",
+  "future_outcomes": {
+    "90d": {"progressed": true, "severity": "S3", "action": "field_repair"},
+    "180d": {"progressed": true, "severity": "S3", "action": "factory_repair"},
+    "365d": {"progressed": true, "severity": "S4", "action": "replace"}
+  },
+  "confirmed_by": "technician report + follow-up inspection"
+}
