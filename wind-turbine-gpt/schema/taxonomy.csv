@@ -1,0 +1,5 @@
+component,damage_type,synonyms,severity_notes,action_mapping
+blade,leading_edge_erosion,"erosion;LEP wear","S1-S2: coating loss; S3: laminate exposure",monitor>field_repair>factory_repair>replace
+blade,structural_crack,"root crack;spar crack","S2 indicates surface-visible crack; S3 impacts load-bearing",ndt>factory_repair>replace
+nacelle,gearbox_wear,"gear wear;torque ripple","S2 associated with vibration alarms",monitor>clean_treat>factory_repair
+blade,icing_overlay,"ice accretion","S1 limited shedding risk; S3 requires shutdown",monitor>clean_treat>shutdown

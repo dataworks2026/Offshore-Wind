@@ -1,0 +1,2 @@
+passage_id,file_path,title,component_tags,damage_tags,progression_model,maintenance_action,environment,license,week_added
+w1-erosion:baseline,knowledge/week1/blade_erosion_basics.md,Leading Edge Erosion Basics,"[blade]","[leading_edge_erosion]",false,"[monitor,field_repair]","[onshore,offshore]","see kb_licenses.md",1
