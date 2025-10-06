@@ -1,4 +1,7 @@
 passage_id,file_path,title,component_tags,damage_tags,progression_model,maintenance_action,environment,license,week_added
 w1-erosion:baseline,knowledge/week1/blade_erosion_basics.md,Leading Edge Erosion Basics,"[blade]","[leading_edge_erosion]",false,"[monitor,field_repair]","[onshore,offshore]","see kb_licenses.md",1
+w1-crack:inspection,knowledge/week1/blade_structural_cracks.md,Structural Crack Diagnostics,"[blade]","[structural_crack]",true,"[field_repair,factory_repair]","[onshore,offshore]","see kb_licenses.md",1
+w1-intervals:baseline,knowledge/week1/preventive_maintenance_intervals.md,Offshore Preventive Maintenance Intervals,"[blade,balance_of_plant]","[leading_edge_erosion,structural_crack]",false,"[inspection,field_repair,factory_repair]","[offshore]","see kb_licenses.md",1
+w1-repair:quality_control,knowledge/week1/composite_repair_quality.md,Composite Repair Quality Control,"[blade]","[leading_edge_erosion,structural_crack]",false,"[field_repair,factory_repair]","[onshore,offshore]","see kb_licenses.md",1
 w2-progression:interval_model,knowledge/week2/progression_and_intervals.md,Interval Progression Model,"[blade]","[leading_edge_erosion,structural_crack]",true,"[monitor,field_repair,factory_repair]","[onshore,offshore]","see kb_licenses.md",2
 w3-environment:freeze_thaw,knowledge/week3/environmental_modifiers.md,Freeze-Thaw Accelerants,"[blade]","[leading_edge_erosion,icing]",true,"[monitor,field_repair]","[onshore,cold_weather]","see kb_licenses.md",3
