@@ -1,19 +1,72 @@
 case_id: WT-001
+title: "Cold-weather leading-edge erosion with trailing-edge crack"
+status: instructional
 inspection_date: 2025-01-15
-site: "Example Site"
+site:
+  name: "Example Site"
+  location_type: onshore
+  environment: [cold_weather, freeze_thaw]
 turbine:
-  model: "V126"
-  rotor_diam_m: 126
-  materials: ["FRP"]
-environment: ["onshore","cold_weather"]
+  model: V126
+  manufacturer: "Vestas"
+  rotor_diameter_m: 126
+  hub_height_m: 137
+  materials: ["FRP", "gelcoat"]
+component_focus: blade
 inspection:
-  method: "drone"
-  distance_m: 12
+  method: drone
+  standoff_m: 12
+  passes: 3
+  notes: "Three-pass circumferential survey capturing upper- and lower-surface imagery."
 cues:
-  - "Longitudinal crack ~0.8m near trailing edge; exposed fibers"
-  - "Leading-edge erosion visible at 30–40% span"
-  - "No icing present"
-images:
-  - path: "./images/wt001_1.jpg"
-  - path: "./images/wt001_2.jpg"
-notes: "Placeholder case for testing"
+  - id: C1
+    description: "Longitudinal crack (~0.8 m) near trailing edge with exposed fibres"
+    media: ./images/wt001_1.jpg
+  - id: C2
+    description: "Leading-edge erosion concentrated at 30–40% span with matte streaking"
+    media: ./images/wt001_2.jpg
+  - id: C3
+    description: "No icing observed during inspection despite cold-weather regime"
+knowledge_references:
+  - passage_id: w1-erosion:baseline
+    rationale: "Establishes typical erosion signatures and span distribution."
+  - passage_id: w2-progression:interval_model
+    rationale: "Provides escalation probabilities for S2 → S3 without mitigation."
+  - passage_id: w3-environment:freeze_thaw
+    rationale: "Quantifies freeze–thaw acceleration on laminate exposure risk."
+candidate_damages:
+  - type: leading_edge_erosion
+    probability: 0.70
+    severity: S2
+    recommended_action: field_repair
+    time_horizon_days: 30
+    supporting_cues: [C2]
+    related_passages: [w1-erosion:baseline, w2-progression:interval_model]
+  - type: structural_crack
+    probability: 0.20
+    severity: S2
+    recommended_action: ndt
+    time_horizon_days: 30
+    supporting_cues: [C1]
+    related_passages: [w2-progression:interval_model]
+  - type: icing_overlay
+    probability: 0.10
+    severity: S1
+    recommended_action: monitor
+    time_horizon_days: 30
+    supporting_cues: [C3]
+    related_passages: [w3-environment:freeze_thaw]
+forecast:
+  risk_30d: 0.32
+  risk_90d: 0.48
+  risk_180d: 0.63
+  risk_365d: 0.80
+  recommended_maintenance_window: "Complete field repair within 90 days to avoid S3/S4 escalation."
+  assumptions:
+    - "Access windows remain typical for the site."
+    - "No additional structural delamination beyond imaged zone."
+validation:
+  - method: "Technician follow-up"
+    notes: "Confirm coating restoration and crack arrest post-repair."
+  - method: "SCADA monitoring"
+    notes: "Track power curve for icing overlay indicators across winter."

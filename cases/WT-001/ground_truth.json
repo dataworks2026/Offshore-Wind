@@ -1,12 +1,46 @@
 {
+  "case_id": "WT-001",
   "component": "blade",
-  "type": "leading_edge_erosion",
-  "severity": "S2",
-  "action": "field_repair",
-  "future_outcomes": {
-    "90d": {"progressed": true, "severity": "S3", "action": "field_repair"},
-    "180d": {"progressed": true, "severity": "S3", "action": "factory_repair"},
-    "365d": {"progressed": true, "severity": "S4", "action": "replace"}
+  "primary_damage": {
+    "type": "leading_edge_erosion",
+    "severity": "S2",
+    "confidence": 0.7,
+    "confirmed_on": "2025-02-20",
+    "confirmation_method": "Technician field repair report"
   },
-  "confirmed_by": "technician report + follow-up inspection"
+  "secondary_findings": [
+    {
+      "type": "structural_crack",
+      "severity": "S2",
+      "confidence": 0.2,
+      "status": "monitored",
+      "follow_up": "NDT scheduled within 30 days"
+    },
+    {
+      "type": "icing_overlay",
+      "severity": "S1",
+      "confidence": 0.1,
+      "status": "watch",
+      "follow_up": "Continue SCADA monitoring"
+    }
+  ],
+  "progression_forecast": [
+    {"horizon_days": 30, "risk": 0.32, "expected_severity": "S2", "recommended_posture": "field_repair"},
+    {"horizon_days": 90, "risk": 0.48, "expected_severity": "S2-S3", "recommended_posture": "field_repair_contingency"},
+    {"horizon_days": 180, "risk": 0.63, "expected_severity": "S3", "recommended_posture": "factory_repair_planning"},
+    {"horizon_days": 365, "risk": 0.80, "expected_severity": "S3-S4", "recommended_posture": "replacement_budget"}
+  ],
+  "maintenance_plan": {
+    "primary_action": "field_repair",
+    "deadline_days": 90,
+    "contingency_actions": ["ndt", "factory_repair"],
+    "assumptions": [
+      "Weather access windows remain typical",
+      "Crack propagation is limited prior to NDT"
+    ]
+  },
+  "lessons_learned": [
+    "Freeze–thaw accelerants warrant proactive scheduling even without icing present.",
+    "Pairing erosion imagery with progression priors improves confidence in budget requests."
+  ]
 }
