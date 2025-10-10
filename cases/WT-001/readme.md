@@ -22,7 +22,7 @@
 ## Knowledge References
 | Passage ID | Knowledge File | Why It Matters |
 |------------|----------------|----------------|
-| `w1-erosion:baseline` | `knowledge/week1/blade_erosion_basics.md` | Defines expected span bands and surface appearance for S1–S2 erosion, anchoring the primary hypothesis. |
+| `w1-erosion:baseline` | `knowledge/week1/leading_edge_erosion_management.md` | Defines expected span bands, velocity thresholds, and mitigation triggers for S1–S2 erosion, anchoring the primary hypothesis. |
 | `w2-progression:interval_model` | `knowledge/week2/progression_and_intervals.md` | Supplies the 90–180 day escalation probabilities used in the forecast curve. |
 | `w3-environment:freeze_thaw` | `knowledge/week3/environmental_modifiers.md` | Quantifies freeze–thaw multipliers that justify tightening the maintenance window. |
 
