@@ -1,0 +1,32 @@
+image_id: WT-003-IMG3
+case_id: WT-003
+capture_details:
+  platform: drone
+  sensor: RGB_imager
+  standoff_m: 15.1
+  angle_deg: 25
+  view_orientation: pressure_side_midspan
+environmental_conditions:
+  weather: sea_spray
+  temperature_c: 6
+  wind_mps: 5
+  lighting: diffuse_low_contrast
+damage_observations:
+  primary_damage_type: surface_contamination
+  severity_estimate: S1
+  location_description: "Pressure-side mid-span showing salt film accumulation."
+  dimensions:
+    length_cm: 120
+    width_mm: 60
+    depth_mm: null
+  progression_indicators:
+    - "Beaded droplets aligned with prevailing wind suggest persistent wetness."
+    - "Surface dulling may hide micro-cracks."
+surface_features:
+  - "Streamlines of condensate trailing aft."
+  - "Legacy polyurethane patch seam visible upstream."
+ancillary_indicators:
+  - "No leading-edge devices obstructing access."
+  - "Ambient spray indicates need for decontamination before repair."
+analyst_notes: "Pre-cleaning required prior to LEP installation to ensure adhesion."
+confidence: 0.68

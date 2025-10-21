@@ -1,0 +1,79 @@
+case_id: WT-003
+title: "Offshore tip erosion with lightning receptor hairline"
+status: instructional
+inspection_date: 2025-03-04
+site:
+  name: "Dogger Bank B"
+  location_type: offshore
+  environment: [high_salt, winter_storm]
+turbine:
+  model: Haliade-X 13
+  manufacturer: "GE Vernova"
+  rotor_diameter_m: 220
+  hub_height_m: 150
+  materials: ["carbon spar", "glass skins", "gelcoat"]
+component_focus: blade
+inspection:
+  method: drone
+  standoff_m: 14
+  passes: 3
+  notes: "Drone sorties flown during 3 m/s lull; tip-in inspection prioritized due to receptor alarm."
+cues:
+  - id: C1
+    description: "Leading-edge erosion with exposed fibers between 72–88% span on suction side."
+    media: ./images/wt003_1.yaml
+  - id: C2
+    description: "Lightning receptor #3 shows radial hairline crack (~40 mm) extending toward trailing edge."
+    media: ./images/wt003_2.yaml
+  - id: C3
+    description: "Surface moisture beads indicate ongoing salt spray deposition along pressure side."
+    media: ./images/wt003_3.yaml
+knowledge_references:
+  - passage_id: w1-erosion:erosion_drivers
+    rationale: "Summarizes high tip-speed erosion mechanisms relevant to observed fiber exposure."
+  - passage_id: w5-repair:field_guidance
+    rationale: "Outlines field repair process for S2 erosion."
+  - passage_id: w1-crack:detection_thresholds
+    rationale: "Defines inspection requirements for receptor-adjacent cracks."
+  - passage_id: w7-inspection:drone_vs_rope
+    rationale: "Supports choice of follow-on rope verification for fine crack measurement."
+  - passage_id: w8-logistics:weather_windows
+    rationale: "Frames scheduling risk given offshore access limits."
+  - passage_id: w2-progression:maintenance_window
+    rationale: "Provides maintenance timing guidance before escalation to factory repair."
+candidate_damages:
+  - type: leading_edge_erosion
+    probability: 0.60
+    severity: S2
+    recommended_action: field_repair
+    time_horizon_days: 60
+    supporting_cues: [C1, C3]
+    related_passages: [w1-erosion:erosion_drivers, w5-repair:field_guidance, w2-progression:maintenance_window]
+  - type: structural_crack
+    probability: 0.25
+    severity: S2
+    recommended_action: ndt
+    time_horizon_days: 30
+    supporting_cues: [C2]
+    related_passages: [w1-crack:detection_thresholds, w7-inspection:ndt_roles]
+  - type: lightning_receptor_wear
+    probability: 0.15
+    severity: S1
+    recommended_action: monitor
+    time_horizon_days: 120
+    supporting_cues: [C2, C3]
+    related_passages: [w1-crack:repair_and_monitoring]
+forecast:
+  risk_30d: 0.36
+  risk_90d: 0.57
+  risk_180d: 0.70
+  risk_365d: 0.84
+  recommended_maintenance_window: "Plan rope-access repair within next 60 days, coordinating with vessel mobilization limits."
+  assumptions:
+    - "Weather windows ≥18 hours become available monthly."
+    - "Lightning protection continuity test remains within tolerance."
+validation:
+  - method: "Rope-access UT and dye penetrant"
+    notes: "Characterize receptor-adjacent crack depth before repair."
+  - method: "Drone re-inspection"
+    notes: "Verify erosion arrest after polyurethane leading-edge kit installation."

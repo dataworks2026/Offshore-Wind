@@ -1,0 +1,32 @@
+image_id: WT-005-IMG2
+case_id: WT-005
+capture_details:
+  platform: rope_access
+  sensor: DSLR_macro
+  standoff_m: 0.3
+  angle_deg: 20
+  view_orientation: suction_side_spar_transition
+environmental_conditions:
+  weather: clear_skies
+  temperature_c: 27
+  wind_mps: 8
+  lighting: harsh_midday
+damage_observations:
+  primary_damage_type: spar_cap_exposure
+  severity_estimate: S3
+  location_description: "Spar-cap knuckle at 48% span where gelcoat missing."
+  dimensions:
+    length_cm: 28
+    width_mm: 35
+    depth_mm: 2.8
+  progression_indicators:
+    - "Brown discoloration indicates UV and moisture affecting laminate."
+    - "Pinholes visible along fiber direction suggest porosity."
+surface_features:
+  - "Step change between intact gelcoat and exposed laminate."
+  - "Adjacent filler cracked in 3 mm segments."
+ancillary_indicators:
+  - "No protective film currently installed."
+  - "Surface temperature 45 °C during inspection."
+analyst_notes: "Factory repair recommended to rebuild laminate and ensure cure control."
+confidence: 0.78

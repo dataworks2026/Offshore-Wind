@@ -1,0 +1,30 @@
+image_id: WT-004-IMG3
+case_id: WT-004
+capture_details:
+  platform: control_room
+  sensor: scada_dashboard_capture
+  standoff_m: null
+  angle_deg: null
+  view_orientation: timeseries_display
+environmental_conditions:
+  weather: cold_snap
+  temperature_c: -5
+  wind_mps: 8
+  lighting: indoor_display
+damage_observations:
+  primary_damage_type: icing_overlay
+  severity_estimate: S2
+  location_description: "Rotor vibration trend showing imbalance attributed to icing on blade B."
+  dimensions:
+    length_cm: null
+    width_mm: null
+    depth_mm: null
+  progression_indicators:
+    - "RMS vibration rose from 0.6 to 1.4 mm/s over 90 minutes."
+    - "Power output dropped 8% during same interval."
+surface_features: []
+ancillary_indicators:
+  - "Alarm code ICE-210 acknowledged at 02:47."
+  - "Auto-derate engaged to 60% rated power."
+analyst_notes: "Data supports de-icing urgency and suggests potential crack-related imbalance."
+confidence: 0.69

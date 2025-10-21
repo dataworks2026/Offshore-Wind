@@ -1,0 +1,30 @@
+image_id: WT-002-IMG2
+case_id: WT-002
+capture_details:
+  platform: nacelle_sensor_pod
+  sensor: strain_gauge_array
+  standoff_m: 0.5
+  angle_deg: 0
+  view_orientation: root_interface
+environmental_conditions:
+  weather: not_applicable
+  temperature_c: 10
+  wind_mps: 0
+  lighting: instrument_display
+damage_observations:
+  primary_damage_type: structural_crack
+  severity_estimate: S1
+  location_description: "Blade root gauge channel B showing +190 microstrain deviation."
+  dimensions:
+    length_cm: null
+    width_mm: null
+    depth_mm: null
+  progression_indicators:
+    - "Strain spike aligned with high-wind event timestamp."
+    - "Signal persists for >6 rotations post-event."
+surface_features: []
+ancillary_indicators:
+  - "SCADA alarm code 3212 (blade load imbalance) active."
+  - "No concurrent temperature drift recorded."
+analyst_notes: "Gauge anomaly corroborates visual evidence of trailing-edge separation mid-span."
+confidence: 0.76

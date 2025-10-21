@@ -1,0 +1,32 @@
+image_id: WT-006-IMG3
+case_id: WT-006
+capture_details:
+  platform: rope_access
+  sensor: handheld_moisture_meter
+  standoff_m: 0.0
+  angle_deg: 0
+  view_orientation: leading_edge_midspan
+environmental_conditions:
+  weather: broken_clouds
+  temperature_c: 12
+  wind_mps: 6
+  lighting: diffuse_low_contrast
+damage_observations:
+  primary_damage_type: moisture_ingress
+  severity_estimate: S1
+  location_description: "Moisture reading beneath lifted patch near upper seam."
+  dimensions:
+    length_cm: null
+    width_mm: null
+    depth_mm: null
+  progression_indicators:
+    - "Relative humidity 9% vs background 3%."
+    - "Condensation ring visible along adhesive edge."
+surface_features:
+  - "Darkened laminate sheen."
+  - "Minor blistering adjacent to sensor pads."
+ancillary_indicators:
+  - "Ambient dew point 6 °C at time of reading."
+  - "Rope technician noted tacky adhesive."
+analyst_notes: "Dry and heat treat prior to new adhesive application to avoid bond failure."
+confidence: 0.7

@@ -1,0 +1,32 @@
+image_id: WT-007-IMG4
+case_id: WT-007
+capture_details:
+  platform: rope_access
+  sensor: DSLR_macro
+  standoff_m: 0.6
+  angle_deg: 22
+  view_orientation: suction_side_leading_edge
+environmental_conditions:
+  weather: overcast
+  temperature_c: 14
+  wind_mps: 9
+  lighting: diffused_sunlight
+damage_observations:
+  primary_damage_type: leading_edge_erosion
+  severity_estimate: S1
+  location_description: "Suction-side leading edge near 25% span with matte abrasion streaks."
+  dimensions:
+    length_cm: 60
+    width_mm: 10
+    depth_mm: 0.3
+  progression_indicators:
+    - "Insect impact residue concentrated along stagnation line."
+    - "No fiber exposure yet, but coating roughness increasing."
+surface_features:
+  - "Fine longitudinal scratches from particulate hits."
+  - "Localized gloss loss surrounding erosion patch."
+ancillary_indicators:
+  - "Temporary chalk marks applied for future comparison."
+  - "Adjacent de-icing port intact."
+analyst_notes: "Track erosion trend during next inspection; treat once severity approaches S2."
+confidence: 0.66

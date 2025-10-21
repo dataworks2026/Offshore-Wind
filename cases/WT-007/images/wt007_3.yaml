@@ -1,0 +1,30 @@
+image_id: WT-007-IMG3
+case_id: WT-007
+capture_details:
+  platform: rope_access
+  sensor: ultrasonic_shear_wave
+  standoff_m: 0.0
+  angle_deg: 0
+  view_orientation: root_end_bolt_circle
+environmental_conditions:
+  weather: overcast
+  temperature_c: 13
+  wind_mps: 9
+  lighting: instrument_display
+damage_observations:
+  primary_damage_type: adhesive_debond
+  severity_estimate: S2
+  location_description: "Shear-wave attenuation map of bolts 12–16 showing 15% drop near crack."
+  dimensions:
+    length_cm: 20
+    width_mm: 30
+    depth_mm: 3
+  progression_indicators:
+    - "Backwall echo reduction concentrated adjacent to bolt #14."
+    - "Mode-converted signal indicates partial debond."
+surface_features: []
+ancillary_indicators:
+  - "Calibration block check completed pre-scan."
+  - "Data logged with 1 cm grid overlay for repeatability."
+analyst_notes: "Recommend torque check and further UT to map full circumference before repair mobilization."
+confidence: 0.73

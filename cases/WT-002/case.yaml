@@ -1,0 +1,77 @@
+case_id: WT-002
+title: "Trailing-edge bondline crack following high-wind event"
+status: instructional
+inspection_date: 2025-02-11
+site:
+  name: "Mesa Ridge Wind Farm"
+  location_type: onshore
+  environment: [high_wind, arid]
+turbine:
+  model: SG 5.0-145
+  manufacturer: "Siemens Gamesa"
+  rotor_diameter_m: 145
+  hub_height_m: 102
+  materials: ["FRP", "balsa core", "gelcoat"]
+component_focus: blade
+inspection:
+  method: drone
+  standoff_m: 10
+  passes: 4
+  notes: "Four-pass helical flight capturing suction- and pressure-side detail after cut-out alarm."
+cues:
+  - id: C1
+    description: "Trailing-edge opening (~65 cm) with visible adhesive voids between 48–58% span on pressure side."
+    media: ./images/wt002_1.yaml
+  - id: C2
+    description: "Sensor pod at blade root shows strain gauge anomaly logged 48 hours prior to inspection."
+    media: ./images/wt002_2.yaml
+  - id: C3
+    description: "Leading-edge scuffing with matte finish but no fiber exposure at 35% span on suction side."
+    media: ./images/wt002_3.yaml
+knowledge_references:
+  - passage_id: w1-crack:detection_thresholds
+    rationale: "Defines escalation triggers for bondline cracks exceeding 50 mm."
+  - passage_id: w4-shm:sensor_array
+    rationale: "Explains strain gauge responses that prompted follow-up."
+  - passage_id: w7-inspection:ndt_roles
+    rationale: "Supports recommendation for ultrasonic confirmation of suspected delamination."
+  - passage_id: w1-erosion:impact_on_performance
+    rationale: "Quantifies performance risk for concurrent erosion cues."
+  - passage_id: w2-progression:interval_model
+    rationale: "Provides probability basis for 90-day escalation without repair."
+candidate_damages:
+  - type: structural_crack
+    probability: 0.65
+    severity: S2
+    recommended_action: ndt
+    time_horizon_days: 14
+    supporting_cues: [C1, C2]
+    related_passages: [w1-crack:detection_thresholds, w7-inspection:ndt_roles]
+  - type: trailing_edge_delamination
+    probability: 0.20
+    severity: S2
+    recommended_action: field_repair
+    time_horizon_days: 45
+    supporting_cues: [C1]
+    related_passages: [w1-crack:repair_and_monitoring, w5-repair:field_guidance]
+  - type: leading_edge_erosion
+    probability: 0.15
+    severity: S1
+    recommended_action: monitor
+    time_horizon_days: 90
+    supporting_cues: [C3]
+    related_passages: [w1-erosion:impact_on_performance]
+forecast:
+  risk_30d: 0.40
+  risk_90d: 0.58
+  risk_180d: 0.72
+  risk_365d: 0.83
+  recommended_maintenance_window: "Complete bondline repair and UT confirmation within 45 days to arrest progression."
+  assumptions:
+    - "Access to rope crews within standard maintenance window."
+    - "No additional hidden damage beyond imaged span."
+validation:
+  - method: "Ultrasonic shear-wave scan"
+    notes: "Confirm subsurface delamination depth along trailing edge."
+  - method: "Rope-access visual closeout"
+    notes: "Document bondline closure after repair and update strain gauge baseline."

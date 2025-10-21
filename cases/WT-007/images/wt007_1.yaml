@@ -1,0 +1,32 @@
+image_id: WT-007-IMG1
+case_id: WT-007
+capture_details:
+  platform: rope_access
+  sensor: DSLR_macro
+  standoff_m: 0.5
+  angle_deg: 15
+  view_orientation: root_end_bolt_circle
+environmental_conditions:
+  weather: overcast
+  temperature_c: 14
+  wind_mps: 10
+  lighting: diffused_sunlight
+damage_observations:
+  primary_damage_type: structural_crack
+  severity_estimate: S3
+  location_description: "Root bolt #14 region with shear crack radiating toward spar cap."
+  dimensions:
+    length_cm: 8.5
+    width_mm: 2.5
+    depth_mm: 1.8
+  progression_indicators:
+    - "Crack edges lifted showing subsurface separation."
+    - "Rust staining at bolt washer indicates moisture ingress."
+surface_features:
+  - "Paint blistering along crack path."
+  - "Torque stripe misaligned relative to bolt."
+ancillary_indicators:
+  - "Bolt preload tag shows last torque check 14 months prior."
+  - "Nearby lightning receptor undamaged."
+analyst_notes: "Crack size exceeds DNV thresholds; maintain turbine offline pending factory repair."
+confidence: 0.84

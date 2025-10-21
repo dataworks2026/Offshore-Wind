@@ -1,0 +1,79 @@
+case_id: WT-004
+title: "Freeze-thaw induced chordwise crack masked by icing"
+status: instructional
+inspection_date: 2025-01-29
+site:
+  name: "North Shore Ridge"
+  location_type: onshore
+  environment: [cold_weather, freeze_thaw]
+turbine:
+  model: V150-4.2
+  manufacturer: "Vestas"
+  rotor_diameter_m: 150
+  hub_height_m: 105
+  materials: ["FRP", "gelcoat", "spar cap"]
+component_focus: blade
+inspection:
+  method: hybrid_drone_thermal
+  standoff_m: 9
+  passes: 2
+  notes: "Thermal and RGB passes executed during sub-zero lull to capture icing and substrate cues."
+cues:
+  - id: C1
+    description: "Thermal frame shows cold-soaked ice band between 30–45% span on suction side."
+    media: ./images/wt004_1.yaml
+  - id: C2
+    description: "Chordwise hairline (~55 mm) emerging from leading edge at 38% span once ice displaced."
+    media: ./images/wt004_2.yaml
+  - id: C3
+    description: "SCADA vibration trace indicates rotor imbalance increase of 1.4 mm/s RMS during icing event."
+    media: ./images/wt004_3.yaml
+knowledge_references:
+  - passage_id: w3-environment:freeze_thaw
+    rationale: "Describes freeze-thaw acceleration of micro-cracks into laminate exposure."
+  - passage_id: w6-icing:accumulation
+    rationale: "Explains how icing can obscure underlying erosion or cracking."
+  - passage_id: w6-icing:deicing_schedule
+    rationale: "Supports rapid de-icing recommendation to avoid secondary erosion."
+  - passage_id: w1-crack:operational_response
+    rationale: "Guides derating thresholds when crack depth suspected beyond 10% laminate."
+  - passage_id: w7-inspection:ndt_roles
+    rationale: "Reinforces need for UT confirmation once visual crack observed."
+  - passage_id: w2-progression:assumption_notes
+    rationale: "Highlights monitoring assumptions that affect progression risk."
+candidate_damages:
+  - type: icing_overlay
+    probability: 0.50
+    severity: S2
+    recommended_action: clean_treat
+    time_horizon_days: 3
+    supporting_cues: [C1, C3]
+    related_passages: [w6-icing:accumulation, w6-icing:deicing_schedule]
+  - type: structural_crack
+    probability: 0.30
+    severity: S2
+    recommended_action: ndt
+    time_horizon_days: 14
+    supporting_cues: [C2, C3]
+    related_passages: [w1-crack:operational_response, w7-inspection:ndt_roles]
+  - type: leading_edge_erosion
+    probability: 0.20
+    severity: S1
+    recommended_action: monitor
+    time_horizon_days: 90
+    supporting_cues: [C2]
+    related_passages: [w3-environment:freeze_thaw, w1-erosion:impact_on_performance]
+forecast:
+  risk_30d: 0.44
+  risk_90d: 0.61
+  risk_180d: 0.69
+  risk_365d: 0.77
+  recommended_maintenance_window: "Execute de-icing within 72 hours and plan UT-assisted repair within two weeks."
+  assumptions:
+    - "Ambient temperatures remain below freezing for next 5 days."
+    - "De-icing equipment availability confirmed."
+validation:
+  - method: "Thermal follow-up"
+    notes: "Verify removal of ice band after treatment."
+  - method: "Ultrasonic phased-array"
+    notes: "Map crack depth to determine if laminate penetration exceeds 10%."

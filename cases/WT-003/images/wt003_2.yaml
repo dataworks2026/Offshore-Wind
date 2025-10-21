@@ -1,0 +1,32 @@
+image_id: WT-003-IMG2
+case_id: WT-003
+capture_details:
+  platform: drone
+  sensor: RGB_imager
+  standoff_m: 12.8
+  angle_deg: 20
+  view_orientation: pressure_side_tip
+environmental_conditions:
+  weather: overcast
+  temperature_c: 6
+  wind_mps: 5
+  lighting: specular_reflection
+damage_observations:
+  primary_damage_type: structural_crack
+  severity_estimate: S2
+  location_description: "Lightning receptor #3 at 78% span, crack extending radially toward trailing edge."
+  dimensions:
+    length_cm: 4
+    width_mm: 1.2
+    depth_mm: 0.8
+  progression_indicators:
+    - "Darkened resin halo suggests moisture ingress."
+    - "Hairline offsets receptor plate by ~0.6 mm."
+surface_features:
+  - "Copper receptor cap intact with mild tarnish."
+  - "Adjacent gelcoat blister from prior lightning strike."
+ancillary_indicators:
+  - "Salt residue crusted along lower edge."
+  - "No burn marks visible around receptor screws."
+analyst_notes: "Recommend dye penetrant during rope access to confirm crack depth before re-potting receptor."
+confidence: 0.74

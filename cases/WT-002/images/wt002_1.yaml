@@ -1,0 +1,32 @@
+image_id: WT-002-IMG1
+case_id: WT-002
+capture_details:
+  platform: drone
+  sensor: RGB_imager
+  standoff_m: 9.8
+  angle_deg: 32
+  view_orientation: pressure_side
+environmental_conditions:
+  weather: clear_skies
+  temperature_c: 12
+  wind_mps: 11
+  lighting: backlit_high_contrast
+damage_observations:
+  primary_damage_type: structural_crack
+  severity_estimate: S2
+  location_description: "Trailing-edge bondline at 52% span (pressure side)."
+  dimensions:
+    length_cm: 65
+    width_mm: 7
+    depth_mm: 3
+  progression_indicators:
+    - "Adhesive void extends beyond gelcoat into core."
+    - "Fiber bridging indicates cyclic opening."
+surface_features:
+  - "Frayed laminate plies curling outward."
+  - "Shadowed cavity showing bondline separation."
+ancillary_indicators:
+  - "No standing water or icing visible."
+  - "Reference fiducial sticker confirms scale."
+analyst_notes: "Recommend UT follow-up to map delamination toward spar cap."
+confidence: 0.82
