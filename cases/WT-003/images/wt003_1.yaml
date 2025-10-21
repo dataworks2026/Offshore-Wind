@@ -1,0 +1,32 @@
+image_id: WT-003-IMG1
+case_id: WT-003
+capture_details:
+  platform: drone
+  sensor: RGB_imager
+  standoff_m: 13.5
+  angle_deg: 38
+  view_orientation: suction_side_tip
+environmental_conditions:
+  weather: overcast
+  temperature_c: 6
+  wind_mps: 5
+  lighting: diffuse_low_contrast
+damage_observations:
+  primary_damage_type: leading_edge_erosion
+  severity_estimate: S2
+  location_description: "Suction-side leading edge between 72% and 88% span."
+  dimensions:
+    length_cm: 160
+    width_mm: 25
+    depth_mm: 2.5
+  progression_indicators:
+    - "Fiber bundles exposed over 40 cm near tip."
+    - "Aft-running streaks indicate continued rain/sea spray impingement."
+surface_features:
+  - "Gloss-to-matte transition along stagnation line."
+  - "Localized voids in gelcoat patch from prior maintenance."
+ancillary_indicators:
+  - "Tip vortex generator visible with intact fasteners."
+  - "No ice accumulation present despite sea spray."
+analyst_notes: "Tip chord roughness consistent with >2% AEP loss per EPRI benchmarks."
+confidence: 0.79

@@ -1,0 +1,123 @@
+format: yaml
+schema_version: 1.0.0
+description: |
+  Structured placeholder for inspection imagery descriptions used in wind turbine damage cases.
+  Each file in `cases/*/images/` SHALL conform to this schema.
+fields:
+  image_id:
+    type: string
+    required: true
+    description: "Unique identifier for the described image (e.g., WT-002-IMG1)."
+  case_id:
+    type: string
+    required: true
+    description: "Case identifier matching the parent folder (e.g., WT-002)."
+  capture_details:
+    type: object
+    required: true
+    description: "Acquisition information for the observation."
+    properties:
+      platform:
+        type: string
+        required: true
+        description: "Acquisition platform (drone, rope_access, control_room, etc.)."
+      sensor:
+        type: string
+        required: true
+        description: "Sensor or modality used (RGB_imager, thermal_imager, ultrasonic_c_scan, etc.)."
+      standoff_m:
+        type: number
+        required: false
+        description: "Approximate distance from sensor to surface in meters; null if not applicable."
+      angle_deg:
+        type: number
+        required: false
+        description: "Viewing angle relative to blade surface normal in degrees; null if not applicable."
+      view_orientation:
+        type: string
+        required: true
+        description: "Textual orientation hint (e.g., suction_side_midspan, root_end_bolt_circle)."
+  environmental_conditions:
+    type: object
+    required: true
+    description: "Ambient conditions during capture."
+    properties:
+      weather:
+        type: string
+        required: true
+        description: "Concise weather descriptor (clear_skies, freezing_fog, thunderstorm, etc.)."
+      temperature_c:
+        type: number
+        required: true
+        description: "Ambient temperature in degrees Celsius."
+      wind_mps:
+        type: number
+        required: true
+        description: "Approximate wind speed in meters per second."
+      lighting:
+        type: string
+        required: true
+        description: "Lighting characterization relevant to image interpretation."
+  damage_observations:
+    type: object
+    required: true
+    description: "Primary damage interpretation derived from the image."
+    properties:
+      primary_damage_type:
+        type: string
+        required: true
+        description: "Dominant damage or condition highlighted (leading_edge_erosion, structural_crack, etc.)."
+      severity_estimate:
+        type: string
+        required: true
+        description: "Estimated severity label aligned with case scale (S0–S4)."
+      location_description:
+        type: string
+        required: true
+        description: "Narrative describing where on the blade/component the cue occurs."
+      dimensions:
+        type: object
+        required: true
+        description: "Measured or estimated size attributes; null values allowed when unknown."
+        properties:
+          length_cm:
+            type: [number, null]
+            required: true
+            description: "Approximate length in centimeters."
+          width_mm:
+            type: [number, null]
+            required: true
+            description: "Approximate width in millimeters."
+          depth_mm:
+            type: [number, null]
+            required: true
+            description: "Approximate depth in millimeters."
+      progression_indicators:
+        type: array
+        required: false
+        description: "List of qualitative cues implying damage progression."
+        items:
+          type: string
+  surface_features:
+    type: array
+    required: true
+    description: "Visible surface characteristics supporting interpretation."
+    items:
+      type: string
+  ancillary_indicators:
+    type: array
+    required: true
+    description: "Supporting operational or contextual clues captured in the image."
+    items:
+      type: string
+  analyst_notes:
+    type: string
+    required: true
+    description: "Analyst summary or recommended follow-up tied to the imagery."
+  confidence:
+    type: number
+    required: true
+    description: "Analyst confidence in interpretation expressed 0–1."
+    constraints:
+      minimum: 0.0
+      maximum: 1.0

@@ -1,0 +1,32 @@
+image_id: WT-006-IMG1
+case_id: WT-006
+capture_details:
+  platform: rope_access
+  sensor: DSLR_macro
+  standoff_m: 0.4
+  angle_deg: 18
+  view_orientation: leading_edge_midspan
+environmental_conditions:
+  weather: broken_clouds
+  temperature_c: 11
+  wind_mps: 6
+  lighting: diffuse_low_contrast
+damage_observations:
+  primary_damage_type: repair_delamination
+  severity_estimate: S2
+  location_description: "Polyurethane patch at 60% span lifting 18 mm from surface."
+  dimensions:
+    length_cm: 55
+    width_mm: 60
+    depth_mm: 5
+  progression_indicators:
+    - "Adhesive bead cracked along forward edge."
+    - "Rust staining around fastener holes suggests moisture ingress."
+surface_features:
+  - "Patch edge curled outward revealing void."
+  - "Underlying gelcoat shows dull finish from prior sanding."
+ancillary_indicators:
+  - "Temporary clamp mark indicates prior field attempt to reseat patch."
+  - "No lightning damage observed nearby."
+analyst_notes: "Remove patch entirely and rebuild with new adhesive stack per ISO guidance."
+confidence: 0.8

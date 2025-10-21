@@ -1,0 +1,81 @@
+case_id: WT-006
+title: "Mid-span patch lift with underlying delamination"
+status: instructional
+inspection_date: 2025-04-07
+site:
+  name: "Baltic Sea Demo Cluster"
+  location_type: offshore
+  environment: [high_salt, shoulder_season]
+turbine:
+  model: SWT-6.0-154
+  manufacturer: "Siemens Gamesa"
+  rotor_diameter_m: 154
+  hub_height_m: 120
+  materials: ["carbon spar", "glass skins", "polyurethane patch"]
+component_focus: blade
+inspection:
+  method: rope_access
+  standoff_m: 0.6
+  passes: 2
+  notes: "Two rope-access descents after SHM alert flagged mid-span strain anomaly."
+cues:
+  - id: C1
+    description: "Polyurethane patch at 60% span peeling from leading edge, exposing adhesive void."
+    media: ./images/wt006_1.yaml
+  - id: C2
+    description: "Ultrasonic C-scan reveals 0.3 m² delamination beneath prior repair."
+    media: ./images/wt006_2.yaml
+  - id: C3
+    description: "Moisture meter reading 9% relative humidity under lifted patch."
+    media: ./images/wt006_3.yaml
+knowledge_references:
+  - passage_id: w1-repair:post_repair_monitoring
+    rationale: "Stresses UT follow-up and monitoring after composite repairs."
+  - passage_id: w5-repair:field_guidance
+    rationale: "Details repair sequence for reinstating leading-edge protection."
+  - passage_id: w4-shm:maintenance_triage
+    rationale: "Explains linking SHM alarms to targeted inspections."
+  - passage_id: w1-crack:repair_and_monitoring
+    rationale: "Provides guidance on long-term monitoring to prevent recurrence."
+  - passage_id: w1-crack:detection_thresholds
+    rationale: "Specifies evaluation criteria once crack depth is suspected near prior repair."
+  - passage_id: w2-progression:maintenance_window
+    rationale: "Supports scheduling repairs before escalation to factory-level work."
+  - passage_id: w7-inspection:data_management
+    rationale: "Reinforces documentation standards for repeat repair zones."
+candidate_damages:
+  - type: repair_delamination
+    probability: 0.50
+    severity: S2
+    recommended_action: field_repair
+    time_horizon_days: 30
+    supporting_cues: [C1, C2]
+    related_passages: [w1-repair:post_repair_monitoring, w5-repair:field_guidance]
+  - type: structural_crack
+    probability: 0.30
+    severity: S2
+    recommended_action: ndt
+    time_horizon_days: 21
+    supporting_cues: [C2]
+    related_passages: [w1-crack:detection_thresholds, w4-shm:maintenance_triage]
+  - type: moisture_ingress
+    probability: 0.20
+    severity: S1
+    recommended_action: monitor
+    time_horizon_days: 60
+    supporting_cues: [C3]
+    related_passages: [w1-repair:surface_prep, w2-progression:assumption_notes]
+forecast:
+  risk_30d: 0.38
+  risk_90d: 0.55
+  risk_180d: 0.67
+  risk_365d: 0.79
+  recommended_maintenance_window: "Rework patch and re-scan within 30 days to avoid moisture-driven delamination growth."
+  assumptions:
+    - "Vessel access secured within next weather window (<1.5 m Hs)."
+    - "Replacement patch materials available on site."
+validation:
+  - method: "Post-repair UT mapping"
+    notes: "Confirm delamination eliminated and attenuation back to baseline."
+  - method: "SHM strain trending"
+    notes: "Verify alarm clears after repair and remains stable for 90 days."

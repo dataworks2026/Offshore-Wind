@@ -1,0 +1,30 @@
+image_id: WT-007-IMG2
+case_id: WT-007
+capture_details:
+  platform: control_room
+  sensor: fiber_bragg_grating_logger
+  standoff_m: null
+  angle_deg: null
+  view_orientation: strain_time_history
+environmental_conditions:
+  weather: thunderstorm
+  temperature_c: 12
+  wind_mps: 18
+  lighting: instrument_display
+damage_observations:
+  primary_damage_type: structural_crack
+  severity_estimate: S2
+  location_description: "Strain channel RB-02 showing +240 microstrain spike during curtailment override."
+  dimensions:
+    length_cm: null
+    width_mm: null
+    depth_mm: null
+  progression_indicators:
+    - "Spike sustained for 14 minutes before shutdown."
+    - "Baseline drift of +60 microstrain persists post-event."
+surface_features: []
+ancillary_indicators:
+  - "SCADA flagged alarm 4417 concurrently."
+  - "Yaw misalignment 6° recorded during event."
+analyst_notes: "Sensor output corroborates physical crack and supports immediate shutdown decision."
+confidence: 0.72

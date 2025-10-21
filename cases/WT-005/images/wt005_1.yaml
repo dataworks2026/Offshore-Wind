@@ -1,0 +1,32 @@
+image_id: WT-005-IMG1
+case_id: WT-005
+capture_details:
+  platform: rope_access
+  sensor: DSLR_macro
+  standoff_m: 0.4
+  angle_deg: 12
+  view_orientation: suction_side_leading_edge
+environmental_conditions:
+  weather: clear_skies
+  temperature_c: 28
+  wind_mps: 9
+  lighting: harsh_midday
+damage_observations:
+  primary_damage_type: leading_edge_erosion
+  severity_estimate: S3
+  location_description: "Suction-side leading edge between 44% and 56% span."
+  dimensions:
+    length_cm: 140
+    width_mm: 45
+    depth_mm: 3.5
+  progression_indicators:
+    - "Fiber bundle exposure spans >60 cm segment."
+    - "Embedded sand particles within laminate."
+surface_features:
+  - "Scalloped profile with undercut edges."
+  - "Residual polyurethane patch peel-back on upstream edge."
+ancillary_indicators:
+  - "Moisture meter reading 4.2% recorded adjacent."
+  - "Temporary tape markers show prior inspection boundary."
+analyst_notes: "Extent meets criteria for immediate structural evaluation before next sandstorm."
+confidence: 0.83

@@ -1,0 +1,32 @@
+image_id: WT-004-IMG1
+case_id: WT-004
+capture_details:
+  platform: drone
+  sensor: thermal_imager
+  standoff_m: 8.7
+  angle_deg: 18
+  view_orientation: suction_side_midspan
+environmental_conditions:
+  weather: freezing_fog
+  temperature_c: -6
+  wind_mps: 4
+  lighting: predawn_low_light
+damage_observations:
+  primary_damage_type: icing_overlay
+  severity_estimate: S2
+  location_description: "Ice band along suction side between 30% and 45% span."
+  dimensions:
+    length_cm: 320
+    width_mm: 90
+    depth_mm: 8
+  progression_indicators:
+    - "Thermal contrast of -8 °C relative to adjacent laminate indicates thick ice."
+    - "Underlying warm streak suggests trapped moisture near crack path."
+surface_features:
+  - "Feathered ice ridges aligned chordwise."
+  - "Localized hot spot near leading edge indicating subsurface heating."
+ancillary_indicators:
+  - "Rotor stopped at 03:12 due to icing alarm."
+  - "No de-icing fluid residue visible."
+analyst_notes: "Remove ice promptly to inspect laminate and avoid imbalance."
+confidence: 0.81

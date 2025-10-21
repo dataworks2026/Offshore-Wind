@@ -1,0 +1,32 @@
+image_id: WT-002-IMG3
+case_id: WT-002
+capture_details:
+  platform: drone
+  sensor: RGB_imager
+  standoff_m: 11.2
+  angle_deg: 28
+  view_orientation: suction_side
+environmental_conditions:
+  weather: clear_skies
+  temperature_c: 13
+  wind_mps: 10
+  lighting: diffuse_cloud_edge
+damage_observations:
+  primary_damage_type: leading_edge_erosion
+  severity_estimate: S1
+  location_description: "Leading edge at 35% span with matte abrasion."
+  dimensions:
+    length_cm: 40
+    width_mm: 12
+    depth_mm: 0.4
+  progression_indicators:
+    - "Surface roughness increase consistent with early gelcoat loss."
+    - "No fiber exposure yet detected."
+surface_features:
+  - "Speckled sand pitting."
+  - "Residual insect debris along stagnation line."
+ancillary_indicators:
+  - "Trailing-edge remains closed within frame."
+  - "No moisture beading visible."
+analyst_notes: "Monitor for accelerated wear if high-wind season persists."
+confidence: 0.71

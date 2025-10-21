@@ -1,0 +1,79 @@
+case_id: WT-005
+title: "Desert sand erosion with emerging spar-cap exposure"
+status: instructional
+inspection_date: 2024-11-18
+site:
+  name: "Ocotillo Mesa Extension"
+  location_type: onshore
+  environment: [arid, high_sand, high_wind]
+turbine:
+  model: ENERCON E-126 EP3
+  manufacturer: "Enercon"
+  rotor_diameter_m: 127
+  hub_height_m: 135
+  materials: ["FRP", "spar cap", "gelcoat"]
+component_focus: blade
+inspection:
+  method: rope_access
+  standoff_m: 0.5
+  passes: 1
+  notes: "Technicians performed upwind rope descent during seasonal shutdown for sandstorm cleanup."
+cues:
+  - id: C1
+    description: "Leading-edge scalloping with fiber exposure over 1.4 m on suction side."
+    media: ./images/wt005_1.yaml
+  - id: C2
+    description: "Spar-cap transition shows brown discoloration and voids where gelcoat missing."
+    media: ./images/wt005_2.yaml
+  - id: C3
+    description: "Surface moisture reading <5% but abrasion dust accumulates along trailing edge."
+    media: ./images/wt005_3.yaml
+knowledge_references:
+  - passage_id: w1-erosion:erosion_drivers
+    rationale: "Links high tip speed and sand impingement to accelerated erosion."
+  - passage_id: w1-erosion:impact_on_performance
+    rationale: "Quantifies aerodynamic penalties associated with exposed fibers."
+  - passage_id: w5-repair:field_guidance
+    rationale: "Details surface preparation and epoxy build-up for field repairs."
+  - passage_id: w5-repair:factory_threshold
+    rationale: "Defines when factory repair becomes necessary due to laminate exposure."
+  - passage_id: w1-repair:surface_prep
+    rationale: "Outlines taper and moisture requirements before applying composite plies."
+  - passage_id: w2-progression:interval_model
+    rationale: "Provides escalation probabilities for untreated S2/S3 erosion."
+candidate_damages:
+  - type: leading_edge_erosion
+    probability: 0.55
+    severity: S3
+    recommended_action: field_repair
+    time_horizon_days: 45
+    supporting_cues: [C1, C3]
+    related_passages: [w1-erosion:erosion_drivers, w5-repair:field_guidance, w2-progression:interval_model]
+  - type: spar_cap_exposure
+    probability: 0.25
+    severity: S3
+    recommended_action: factory_repair
+    time_horizon_days: 90
+    supporting_cues: [C1, C2]
+    related_passages: [w5-repair:factory_threshold, w1-crack:repair_and_monitoring]
+  - type: gelcoat_loss
+    probability: 0.20
+    severity: S2
+    recommended_action: field_repair
+    time_horizon_days: 60
+    supporting_cues: [C2, C3]
+    related_passages: [w1-repair:surface_prep, w1-erosion:impact_on_performance]
+forecast:
+  risk_30d: 0.47
+  risk_90d: 0.66
+  risk_180d: 0.78
+  risk_365d: 0.88
+  recommended_maintenance_window: "Complete leading-edge rebuild during next 60-day outage to prevent spar-cap compromise."
+  assumptions:
+    - "Field crew availability during winter lull."
+    - "No further sandstorms exceeding 25 m/s before repair."
+validation:
+  - method: "High-resolution photogrammetry"
+    notes: "Quantify erosion profile for repair planning."
+  - method: "Post-repair ultrasonic spot checks"
+    notes: "Verify bond quality along spar-cap patch."

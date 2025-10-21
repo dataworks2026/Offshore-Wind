@@ -1,0 +1,30 @@
+image_id: WT-006-IMG2
+case_id: WT-006
+capture_details:
+  platform: rope_access
+  sensor: ultrasonic_c_scan
+  standoff_m: 0.0
+  angle_deg: 0
+  view_orientation: leading_edge_midspan
+environmental_conditions:
+  weather: broken_clouds
+  temperature_c: 11
+  wind_mps: 6
+  lighting: instrument_display
+damage_observations:
+  primary_damage_type: structural_crack
+  severity_estimate: S2
+  location_description: "C-scan amplitude drop indicating delamination beneath patch footprint."
+  dimensions:
+    length_cm: 70
+    width_mm: 45
+    depth_mm: 2
+  progression_indicators:
+    - "Backwall echo loss across central 0.3 m² region."
+    - "Intermittent high-frequency noise along spar cap interface."
+surface_features: []
+ancillary_indicators:
+  - "Calibrated against reference coupon prior to scan."
+  - "Data logged with GPS tag for trend comparison."
+analyst_notes: "Structural crack likely reopened below repair; plan scarf removal to inspect spar cap."
+confidence: 0.75

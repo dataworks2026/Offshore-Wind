@@ -1,0 +1,86 @@
+case_id: WT-007
+title: "Root-end shear crack following curtailment override"
+status: instructional
+inspection_date: 2025-05-16
+site:
+  name: "Prairie View Wind"
+  location_type: onshore
+  environment: [agricultural, high_humidity]
+turbine:
+  model: N117/3600
+  manufacturer: "Nordex"
+  rotor_diameter_m: 117
+  hub_height_m: 91
+  materials: ["FRP", "spar cap", "root insert"]
+component_focus: blade
+inspection:
+  method: rope_access
+  standoff_m: 0.7
+  passes: 2
+  notes: "Rope team deployed after SHM alarms during storm curtailment override."
+cues:
+  - id: C1
+    description: "Root-end shear crack (~85 mm) radiating from bolt #14 toward spar cap."
+    media: ./images/wt007_1.yaml
+  - id: C2
+    description: "Fiber Bragg grating trace shows +240 microstrain spike aligned with event."
+    media: ./images/wt007_2.yaml
+  - id: C3
+    description: "Ultrasonic shear-wave reading indicates 15% attenuation drop along root insert."
+    media: ./images/wt007_3.yaml
+  - id: C4
+    description: "Suction-side leading edge shows light erosion streaking near 25% span."
+    media: ./images/wt007_4.yaml
+knowledge_references:
+  - passage_id: w4-shm:sensor_array
+    rationale: "Connects sensor anomaly thresholds to inspection urgency."
+  - passage_id: w4-shm:maintenance_triage
+    rationale: "Provides guidance on scheduling follow-up actions after repeated SHM alarms."
+  - passage_id: w1-crack:detection_thresholds
+    rationale: "Sets UT evaluation criteria for root bondline cracks >50 mm."
+  - passage_id: w1-crack:operational_response
+    rationale: "Defines derate/shutdown actions for deep structural cracks."
+  - passage_id: w7-inspection:ndt_roles
+    rationale: "Supports UT confirmation and rope-access follow-up."
+  - passage_id: w1-repair:cure_validation
+    rationale: "Guides quality checks after anticipated root repair."
+  - passage_id: w2-progression:interval_model
+    rationale: "Provides escalation probabilities if repair delayed past 90 days."
+  - passage_id: w1-erosion:impact_on_performance
+    rationale: "Quantifies performance risk tied to secondary leading-edge erosion cue."
+candidate_damages:
+  - type: structural_crack
+    probability: 0.70
+    severity: S3
+    recommended_action: factory_repair
+    time_horizon_days: 21
+    supporting_cues: [C1, C2, C3]
+    related_passages: [w1-crack:detection_thresholds, w1-crack:operational_response]
+  - type: adhesive_debond
+    probability: 0.20
+    severity: S2
+    recommended_action: ndt
+    time_horizon_days: 30
+    supporting_cues: [C1, C3]
+    related_passages: [w4-shm:maintenance_triage, w7-inspection:ndt_roles]
+  - type: leading_edge_erosion
+    probability: 0.10
+    severity: S1
+    recommended_action: monitor
+    time_horizon_days: 120
+    supporting_cues: [C4]
+    related_passages: [w1-erosion:impact_on_performance]
+forecast:
+  risk_30d: 0.52
+  risk_90d: 0.71
+  risk_180d: 0.83
+  risk_365d: 0.90
+  recommended_maintenance_window: "Schedule root-end factory repair within three weeks; maintain turbine offline until clearance."
+  assumptions:
+    - "Cranes available within region during late spring."
+    - "No additional bolt preload loss beyond inspected sector."
+validation:
+  - method: "Factory refurbishment QA"
+    notes: "Document scarf ratio, cure metrics, and UT acceptance before redeployment."
+  - method: "SHM baseline reset"
+    notes: "Re-zero fiber Bragg sensors and monitor for 6 months post-repair."

@@ -1,0 +1,32 @@
+image_id: WT-005-IMG3
+case_id: WT-005
+capture_details:
+  platform: rope_access
+  sensor: handheld_moisture_meter
+  standoff_m: 0.0
+  angle_deg: 0
+  view_orientation: trailing_edge_band
+environmental_conditions:
+  weather: clear_skies
+  temperature_c: 26
+  wind_mps: 7
+  lighting: harsh_midday
+damage_observations:
+  primary_damage_type: gelcoat_loss
+  severity_estimate: S2
+  location_description: "Trailing-edge dust accumulation zone with thin gelcoat."
+  dimensions:
+    length_cm: 90
+    width_mm: 15
+    depth_mm: 0.6
+  progression_indicators:
+    - "Moisture reading 4.2% confirms dryness suitable for repair."
+    - "Abrasive particulates trapped along seam indicate ongoing wear."
+surface_features:
+  - "Fine parallel abrasion lines."
+  - "Small voids near fastener plug."
+ancillary_indicators:
+  - "Temporary clamp marks from previous LEP installation visible."
+  - "No cracks observed on opposite side."
+analyst_notes: "Clean and abrade before epoxy build-up to restore smooth contour."
+confidence: 0.7
