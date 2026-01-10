@@ -1,0 +1,31 @@
+# Recommended Python: 3.10–3.12
+# (Gradio needs >=3.10; Roboflow needs >=3.9,<3.13)
+
+# --- Core (Notebook installs these) ---
+roboflow
+ultralytics
+gradio>=4.0.0
+sympy<1.13
+
+# --- ML stacks used/imported in the notebook ---
+# NOTE: torch/torchvision versions depend on your CUDA setup (GPU vs CPU).
+# torch>=1.8
+# torchvision
+
+# tensorflow==2.15.0
+# keras==2.15.0
+
+# --- Common scientific + utilities used/imported ---
+numpy
+pandas
+PyYAML
+Pillow
+opencv-python
+
+# --- Visualization used in notebook cells ---
+matplotlib
+seaborn
+
+# --- Nice-to-have (often present in notebook envs; safe) ---
+tqdm
+ipython

@@ -1,0 +1,60 @@
+=================================== Ultralytics validate() ===================================
+
+Loading oversampled model from: D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind\best.pt
+Using YAML: D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind\wind-combined-2\data_8class_oversampled_max.yaml
+Ultralytics 8.3.250  Python-3.10.11 torch-2.6.0+cu124 CUDA:0 (NVIDIA GeForce RTX 3070 Ti, 8191MiB)
+Model summary (fused): 72 layers, 3,007,208 parameters, 0 gradients, 8.1 GFLOPs
+val: Fast image access  (ping: 0.10.0 ms, read: 225.239.6 MB/s, size: 30.5 KB)
+val: Scanning D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind\wind-combined-2\valid\labels.cache... 875 images, 7 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 875/val: Scanning D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind\wind-combined-2\valid\labels.cache... 875 images, 7 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 875/875  0.0s
+WARNING Box and segment counts should be equal, but got len(segments) = 543, len(boxes) = 1129. To resolve this only boxes will be used and all segments will be removed. To avoid this please supply either a detect or segment dataset, not a detect-segment mixed dataset.
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 55/55 6.3it/s 8.8s
+                   all        875       1129      0.799      0.702      0.742      0.531
+      Lightning Strike        154        235       0.96      0.877      0.909      0.733
+           OIL LEAKAGE        120        203        0.9      0.844      0.911      0.724
+               PU-tape          2          2       0.82          1      0.995      0.895
+                 Paint        162        170      0.567      0.371      0.443      0.206
+         Surface Crack        122        204      0.858        0.5      0.598       0.38
+                  dirt         35         35      0.638      0.554      0.504      0.245
+            le-erosion        280        280      0.851      0.768      0.834      0.533
+Speed: 1.8ms preprocess, 2.3ms inference, 0.0ms loss, 1.6ms postprocess per image
+Results saved to D:\Haider\Upwork\Projects\Research\3_ActionRecognition\Repos\InternVideo\runs\detect\val15
+
+=== 8-Class Oversampled + Augmented Model — Numeric Metrics ===
+mAP50-95: 0.5309337060297604
+mAP50   : 0.7421665847361277
+mAP75   : 0.5546774134949414
+Precision: [    0.95952     0.90018     0.82039     0.56708     0.85799     0.63798     0.85075]
+Recall   : [     0.8766     0.84407           1     0.37059         0.5     0.55408     0.76786]
+False alarm rate   : [   0.040477    0.099819     0.17961     0.43292     0.14201     0.36202     0.14925]
+Missed damage rate : [     0.1234     0.15593           0     0.62941         0.5     0.44592     0.23214]
+
+=== Precision-Recall Metrics (AVG) ===
+Precision: 0.7991273505513711
+Recall   : 0.7018838706893646
+
+=== Visual Metrics ===
+No confusion_matrix.png found at runs\detect\train_8class_oversampled_max\confusion_matrix.png
+No results.png found at runs\detect\train_8class_oversampled_max\results.png
+
+=================================== Inference-based-Validaton() ===================================
+
+Predict-eval split: val
+Dataset YAML      : D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind\wind-combined-2\data_8class_oversampled_max.yaml
+Split path        : D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind\wind-combined-2\valid\images
+Using weights     : D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind\best.pt
+Images evaluated  : 875
+Match IoU thresh  : 0.25
+Predict settings  : imgsz=640, conf=0.25 (inference.py), NMS iou=0.45 (inference.py)
+
+=== Predict-on-test — Fixed-threshold Metrics (for predict() sanity) ===
+Images     : 875
+GT boxes   : 1129
+Pred boxes : 919
+TP         : 786
+FP         : 133
+FN         : 343
+Precision  : 0.8552774755168662
+Recall     : 0.6961913197519929
+Precision:    [0.968, 0.935, 0.5, 0.655, 0.897, 0.679, 0.792]
+Recall:       [0.906, 0.852, 0.5, 0.435, 0.51, 0.543, 0.721]
+(offwind_venv) PS D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind> 
