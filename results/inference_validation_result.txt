@@ -1,13 +1,16 @@
+PS D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind> & "D:/Haider/Upwork/Projects/TechFrontier Lab/Backend/9_Notebook_To_Python_App/Offshore-Wind/offwind_venv/Scripts/Activate.ps1"
+(offwind_venv) PS D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind> & "D:/Haider/Upwork/Projects/TechFrontier Lab/Backend/9_Notebook_To_Python_App/Offshore-Wind/offwind_venv/Scripts/python.exe" "d:/Haider/Upwork/Projects/TechFrontier Lab/Backend/9_Notebook_To_Python_App/Offshore-Wind/scripts/run_inference.py"
+
 =================================== Ultralytics validate() ===================================
 
 Loading oversampled model from: D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind\best.pt
 Using YAML: D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind\wind-combined-2\data_8class_oversampled_max.yaml
 Ultralytics 8.3.250  Python-3.10.11 torch-2.6.0+cu124 CUDA:0 (NVIDIA GeForce RTX 3070 Ti, 8191MiB)
 Model summary (fused): 72 layers, 3,007,208 parameters, 0 gradients, 8.1 GFLOPs
-val: Fast image access  (ping: 0.10.0 ms, read: 225.239.6 MB/s, size: 30.5 KB)
+val: Fast image access  (ping: 0.10.0 ms, read: 192.237.5 MB/s, size: 36.9 KB)
 val: Scanning D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind\wind-combined-2\valid\labels.cache... 875 images, 7 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 875/val: Scanning D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind\wind-combined-2\valid\labels.cache... 875 images, 7 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 875/875  0.0s
 WARNING Box and segment counts should be equal, but got len(segments) = 543, len(boxes) = 1129. To resolve this only boxes will be used and all segments will be removed. To avoid this please supply either a detect or segment dataset, not a detect-segment mixed dataset.
-                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 55/55 6.3it/s 8.8s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 55/55 5.4it/s 10.3s
                    all        875       1129      0.799      0.702      0.742      0.531
       Lightning Strike        154        235       0.96      0.877      0.909      0.733
            OIL LEAKAGE        120        203        0.9      0.844      0.911      0.724
@@ -16,8 +19,8 @@ WARNING Box and segment counts should be equal, but got len(segments) = 543, len
          Surface Crack        122        204      0.858        0.5      0.598       0.38
                   dirt         35         35      0.638      0.554      0.504      0.245
             le-erosion        280        280      0.851      0.768      0.834      0.533
-Speed: 1.8ms preprocess, 2.3ms inference, 0.0ms loss, 1.6ms postprocess per image
-Results saved to D:\Haider\Upwork\Projects\Research\3_ActionRecognition\Repos\InternVideo\runs\detect\val15
+Speed: 2.3ms preprocess, 2.9ms inference, 0.0ms loss, 1.7ms postprocess per image
+Results saved to D:\Haider\Upwork\Projects\Research\3_ActionRecognition\Repos\InternVideo\runs\detect\val21
 
 === 8-Class Oversampled + Augmented Model — Numeric Metrics ===
 mAP50-95: 0.5309337060297604
@@ -41,7 +44,7 @@ No results.png found at runs\detect\train_8class_oversampled_max\results.png
 Predict-eval split: val
 Dataset YAML      : D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind\wind-combined-2\data_8class_oversampled_max.yaml
 Split path        : D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind\wind-combined-2\valid\images
-Using weights     : D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind\best.pt
+Using weights     : D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind\best.pt   
 Images evaluated  : 875
 Match IoU thresh  : 0.25
 Predict settings  : imgsz=640, conf=0.25 (inference.py), NMS iou=0.45 (inference.py)
@@ -57,4 +60,10 @@ Precision  : 0.8552774755168662
 Recall     : 0.6961913197519929
 Precision:    [0.968, 0.935, 0.5, 0.655, 0.897, 0.679, 0.792]
 Recall:       [0.906, 0.852, 0.5, 0.435, 0.51, 0.543, 0.721]
+
+=== Batch sanity summary ===
+Images tested                : 875
+Images with >=1 detection    : 718
+Images with 0 detections     : 157
+Examples written to          : D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind\out_inference_examples
 (offwind_venv) PS D:\Haider\Upwork\Projects\TechFrontier Lab\Backend\9_Notebook_To_Python_App\Offshore-Wind> 

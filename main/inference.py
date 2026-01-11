@@ -163,100 +163,16 @@ ImageLike = Union[Image.Image, np.ndarray, str, Path]
 
 from typing import Dict, Any
 
-def predict(
+def predict_detections(
     image: ImageLike,
     model_path: Optional[Union[str, Path]] = None,
-    imgsz=640,
-    conf=0.5,
-    iou=0.7,
-    display = False
+    imgsz: int = 640,
+    conf: float = 0.25,
+    iou: float = 0.45,
 ) -> List[Dict[str, Any]]:
     """
-    Run YOLO inference and return detections in an evaluation-friendly structure.
-
-    Internally calls Ultralytics `model.predict(...)` with common inference knobs:
-    - imgsz: resize/letterbox target size
-    - conf: confidence threshold
-    - iou: NMS IoU threshold :contentReference[oaicite:5]{index=5}
-
-    Args:
-        image: Image input. Can be PIL.Image, numpy array (BGR/RGB), filepath, or Path.
-        model_path: Weights path (best.pt). If None, uses cached auto-resolved best.pt.
-        imgsz: Inference size passed to Ultralytics.
-        conf: Confidence threshold passed to Ultralytics.
-        iou: NMS IoU threshold passed to Ultralytics.
-        display: If True, renders an OpenCV window with the annotated result.
-
-    Returns:
-        List of detections, each:
-            {
-              "cls": int,              # class index
-              "conf": float,           # confidence score
-              "xyxy": [x1,y1,x2,y2]    # pixel coords (floats)
-            }
-        Returns an empty list if no boxes are found.
-    """
-    model = load_model(model_path=model_path)
-
-    results = model.predict(
-        source=image,
-        imgsz=imgsz,
-        conf=conf,
-        iou=iou,
-        verbose = False
-        )
-
-    res = results[0]
-
-    if display:
-        # Annotated image (Ultralytics plot -> BGR). Convert BGR -> RGB to match notebook.
-        annotated_bgr = res.plot()
-        annotated_rgb = annotated_bgr[:, :, ::-1]
-        cv2.imshow("annotated", annotated_bgr)
-
-    dets: List[Dict[str, Any]] = []
-    if res.boxes is None or len(res.boxes) == 0:
-        return dets
-
-    xyxy = res.boxes.xyxy.cpu().numpy()
-    conf = res.boxes.conf.cpu().numpy()
-    cls  = res.boxes.cls.cpu().numpy().astype(int)
-
-    for i in range(len(cls)):
-        dets.append({
-            "cls": int(cls[i]),
-            "conf": float(conf[i]),
-            "xyxy": [float(x) for x in xyxy[i]],
-        })
-
-    return dets
-
-
-def predict_v2(image: ImageLike,
-               model_path: Optional[Union[str, Path]] = None,
-               imgsz=640,
-               conf=0.5,
-               iou=0.7,
-               ) -> Tuple[np.ndarray, str]:
-    """
-    Legacy/contract-stable inference wrapper used by CLI + notebook-style outputs.
-
-    Runs Ultralytics prediction and returns:
-      1) annotated RGB image (np.ndarray, HxWx3)
-      2) a newline-separated summary of counts per class, in CLASS_NAMES order
-
-    Args:
-        image: Image input (same accepted types as `predict()`).
-        model_path: Weights path (best.pt). If None, uses cached auto-resolved best.pt.
-        imgsz: Inference size.
-        conf: Confidence threshold.
-        iou: NMS IoU threshold.
-
-    Returns:
-        (annotated_rgb, summary_text)
-
-        summary_text format:
-            "<ClassName0>: <count0>\\n<ClassName1>: <count1>\\n..."
+    Return raw detections only (evaluation-friendly):
+      [{"cls": int, "conf": float, "xyxy": [x1,y1,x2,y2]}, ...]
     """
     model = load_model(model_path=model_path)
 
@@ -269,20 +185,68 @@ def predict_v2(image: ImageLike,
     )
     res = results[0]
 
-    # Annotated image (Ultralytics plot -> BGR). Convert BGR -> RGB to match notebook.
-    annotated_bgr = res.plot()
+    dets: List[Dict[str, Any]] = []
+    if res.boxes is None or len(res.boxes) == 0:
+        return dets
+
+    xyxy = res.boxes.xyxy.cpu().numpy()
+    confs = res.boxes.conf.cpu().numpy()
+    clss  = res.boxes.cls.cpu().numpy().astype(int)
+
+    for i in range(len(clss)):
+        dets.append({
+            "cls": int(clss[i]),
+            "conf": float(confs[i]),
+            "xyxy": [float(x) for x in xyxy[i]],
+        })
+    return dets
+
+
+def predict(
+    image: ImageLike,
+    model_path: Optional[Union[str, Path]] = None,
+    imgsz: int = 640,
+    conf: float = 0.25,
+    iou: float = 0.45,
+) -> Tuple[np.ndarray, str]:
+    """
+    Deployment contract:
+      returns (annotated_rgb, summary_text)
+
+    Always returns both outputs even if there are 0 detections.
+    """
+    model = load_model(model_path=model_path)
+
+    results = model.predict(
+        source=image,
+        imgsz=imgsz,
+        conf=conf,
+        iou=iou,
+        verbose=False,
+    )
+    res = results[0]
+
+    # annotated image (BGR from Ultralytics) -> RGB
+    annotated_bgr = res.plot()  # returns annotated image :contentReference[oaicite:1]{index=1}
     annotated_rgb = annotated_bgr[:, :, ::-1]
 
-    # Count detections per class (only those within CLASS_NAMES range)
+    # build summary
+    dets = predict_detections(image, model_path=model_path, imgsz=imgsz, conf=conf, iou=iou)
+    total = len(dets)
+
+    # if total == 0:
+    #     summary = "0 detections"
+    #     return annotated_rgb, summary
+
+    # optional: include per-class counts (nice for debugging)
     counts = {name: 0 for name in CLASS_NAMES}
+    for d in dets:
+        cid = int(d["cls"])
+        if 0 <= cid < len(CLASS_NAMES):
+            counts[CLASS_NAMES[cid]] += 1
 
-    if res.boxes is not None and len(res.boxes) > 0:
-        class_ids = res.boxes.cls.cpu().numpy().astype(int)
-        for cid in class_ids:
-            if 0 <= cid < len(CLASS_NAMES):
-                counts[CLASS_NAMES[cid]] += 1
-
-    # EXACT formatting: same order, newline joined
-    summary = "\n".join([f"{name}: {counts[name]}" for name in CLASS_NAMES])
+    summary_lines = [f"Total detections: {total}"]
+    summary_lines += [f"{name}: {counts[name]}" for name in CLASS_NAMES]
+    summary = "\n".join(summary_lines)
 
     return annotated_rgb, summary

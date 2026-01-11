@@ -1,0 +1,9 @@
+Total detections: 1
+Drain hole impairment: 0
+Lightning Strike: 0
+OIL LEAKAGE: 0
+PU-tape: 0
+Paint: 0
+Surface Crack: 0
+dirt: 0
+le-erosion: 1

@@ -25,7 +25,7 @@ from typing import List, Optional
 import numpy as np
 
 import yaml
-from main.inference import auto_find_best_pt, validate, predict
+from main.inference import auto_find_best_pt, validate, predict, predict_detections
 
 IMG_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 import cv2
@@ -144,6 +144,7 @@ def eval_predict_per_class_pr(
     weights: str,
     num_classes: int,
     conf_filter: float | None = None,   # if None, use preds as returned; else filter here
+    examples_dir: str| None = None,
     debug: bool = False,
 ) -> Dict:
     """
@@ -173,6 +174,8 @@ def eval_predict_per_class_pr(
         each shaped (num_classes,).
     """
 
+    global with_det, zero_det, saved_with, saved_zero
+
     # per-class counters
     tp = np.zeros(num_classes, dtype=np.int64)
     fp = np.zeros(num_classes, dtype=np.int64)
@@ -185,7 +188,24 @@ def eval_predict_per_class_pr(
         h, w = frame.shape[:2]
 
         # preds: list of dicts: {"cls": int, "conf": float, "xyxy": [x1,y1,x2,y2]}
-        preds = predict(frame, model_path=weights)
+        preds = predict_detections(frame, model_path=weights, imgsz=640, conf=0.5, iou=0.7)
+        if len(preds) > 0:
+            with_det += 1
+            if not saved_with:
+                ann_rgb, summary = predict(frame, model_path=weights, imgsz=640, conf=0.5, iou=0.7)
+                out_img = examples_dir / "sample_with_detections.jpg"
+                cv2.imwrite(str(out_img), ann_rgb[:, :, ::-1])  # RGB -> BGR for cv2
+                (examples_dir / "sample_with_detections.txt").write_text(summary, encoding="utf-8")
+                saved_with = True
+        else:
+            zero_det += 1
+            if not saved_zero:
+                ann_rgb, summary = predict(frame, model_path=weights, imgsz=640, conf=0.5, iou=0.7)
+                out_img = examples_dir / "sample_zero_detections.jpg"
+                cv2.imwrite(str(out_img), ann_rgb[:, :, ::-1])
+                (examples_dir / "sample_zero_detections.txt").write_text(summary, encoding="utf-8")
+                saved_zero = True
+
 
         if conf_filter is not None:
             preds = [p for p in preds if float(p["conf"]) >= float(conf_filter)]
@@ -290,7 +310,7 @@ def eval_predict_precision_recall(
         #h,w,c = Mat.shape
 
         # Predictions (already filtered by conf=0.25 inside inference.py)
-        preds = predict(frame, model_path=weights)
+        preds = predict_detections(frame, model_path=weights, imgsz= 640, conf=0.5, iou=0.7)
 
         n_pred += len(preds)
 
@@ -357,6 +377,10 @@ def eval_predict_precision_recall(
         "match_iou": match_iou,
     }
 
+with_det = 0
+zero_det = 0
+saved_with = False
+saved_zero = False
 
 def run_test_pr_mode(repo_root: Path, weights: str, args) -> None:
     """
@@ -371,6 +395,8 @@ def run_test_pr_mode(repo_root: Path, weights: str, args) -> None:
     Side effects:
       - Prints evaluation summaries to stdout.
     """
+    examples_dir = repo_root / "out_inference_examples"
+    examples_dir.mkdir(parents=True, exist_ok=True)
 
     yaml_path = auto_find_data_yaml(repo_root, preferred=args.data_yaml)
     data = yaml.safe_load(yaml_path.read_text(encoding="utf-8"))
@@ -420,7 +446,7 @@ def run_test_pr_mode(repo_root: Path, weights: str, args) -> None:
     num_classes = len(names)
 
     #m = eval_predict_per_class_pr(image_paths, weights, num_classes, conf_filter=0.25)
-    m = eval_predict_per_class_pr(image_paths, weights, num_classes, conf_filter=None)
+    m = eval_predict_per_class_pr(image_paths, weights, num_classes, conf_filter=None, examples_dir=examples_dir)
 
     # print(f"{'Class':<22} {'GT':>6} {'Pred':>6} {'TP':>6} {'FP':>6} {'FN':>6} {'P':>8} {'R':>8}")
     # for i, name in enumerate(names):
@@ -437,6 +463,13 @@ def run_test_pr_mode(repo_root: Path, weights: str, args) -> None:
 
     print(f"Precision:    {p_list}")
     print(f"Recall:       {r_list}")
+
+    print("\n=== Batch sanity summary ===")
+    print("Images tested                :", len(image_paths))
+    print("Images with >=1 detection    :", with_det)
+    print("Images with 0 detections     :", zero_det)
+    print("Examples written to          :", examples_dir.resolve())
+
 
 #=========================================================================
 
