@@ -3,6 +3,7 @@ Inference Service - Wraps the main/inference.py module
 """
 
 import sys
+import os
 from pathlib import Path
 from typing import List, Dict, Tuple
 import numpy as np
@@ -10,15 +11,23 @@ from PIL import Image
 import io
 import base64
 
-# Add parent directory to path to import main.inference
+# Add /app to path for Docker container (main/ is at /app/main)
+# Also add parent directories for local development
+sys.path.insert(0, "/app")
 sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
 
 from main.inference import predict, predict_detections, load_model, CLASS_NAMES
 
 class InferenceService:
-    def __init__(self, model_path: str = "best.pt"):
+    def __init__(self, model_path: str = None):
         """Initialize inference service with model path"""
-        self.model_path = Path(__file__).parent.parent.parent.parent / model_path
+        # Use MODEL_PATH env var (Docker), or fallback to relative path (local dev)
+        if model_path:
+            self.model_path = Path(model_path)
+        elif os.environ.get("MODEL_PATH"):
+            self.model_path = Path(os.environ["MODEL_PATH"])
+        else:
+            self.model_path = Path(__file__).parent.parent.parent.parent / "best.pt"
         self.model = None
 
     def load_model_if_needed(self):
