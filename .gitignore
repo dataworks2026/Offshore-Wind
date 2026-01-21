@@ -1,22 +1,51 @@
-# Text-focused repository ignores
+# OS
 .DS_Store
 Thumbs.db
+
+# Editors
 *.tmp
 *.swp
 *.swo
-*.log
 *.bak
-__pycache__/
 .idea/
 .vscode/
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.tif
-*.tiff
-*.bmp
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# Node
+node_modules/
+.next/
+out/
+build/
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.local
+.env*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Uploads (runtime data)
+uploads/
+
+# Claude Code
+.claude/
+
+# Archive files
 *.zip
 *.tar
 *.tar.gz
 *.rar
+
+# SSL certificates (keep only .gitkeep)
+nginx/ssl/*
+!nginx/ssl/.gitkeep
