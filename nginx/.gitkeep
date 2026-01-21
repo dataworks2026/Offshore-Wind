@@ -1,0 +1,2 @@
+# This directory contains nginx configuration
+# SSL certificates should be placed in nginx/ssl/ (not committed to git)
