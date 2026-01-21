@@ -43,14 +43,16 @@ import numpy as np
 from PIL import Image
 import cv2
 import torch
+import functools
 
 # Fix for PyTorch 2.6+ weights_only security restriction
-# This allows loading YOLO models that were saved with older PyTorch versions
-try:
-    from ultralytics.nn.tasks import DetectionModel
-    torch.serialization.add_safe_globals([DetectionModel])
-except (ImportError, AttributeError):
-    pass  # Older PyTorch or ultralytics version
+# Must patch torch.load BEFORE importing ultralytics
+_original_torch_load = torch.load
+@functools.wraps(_original_torch_load)
+def _patched_torch_load(*args, **kwargs):
+    kwargs['weights_only'] = False
+    return _original_torch_load(*args, **kwargs)
+torch.load = _patched_torch_load
 
 from ultralytics import YOLO
 
