@@ -42,6 +42,15 @@ from typing import Optional, Tuple, Union, List
 import numpy as np
 from PIL import Image
 import cv2
+import torch
+
+# Fix for PyTorch 2.6+ weights_only security restriction
+# This allows loading YOLO models that were saved with older PyTorch versions
+try:
+    from ultralytics.nn.tasks import DetectionModel
+    torch.serialization.add_safe_globals([DetectionModel])
+except (ImportError, AttributeError):
+    pass  # Older PyTorch or ultralytics version
 
 from ultralytics import YOLO
 
