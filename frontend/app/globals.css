@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-light: #E5E7EB;
+  --background-dark: #1a1a2e;
+  --panel-light-start: #F8FCFF;
+  --panel-light-end: #E3F2FD;
+  --panel-dark-start: #16213e;
+  --panel-dark-end: #1a1a2e;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background-color: var(--background-light);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode body styles */
+.dark body,
+body.dark {
+  --foreground-rgb: 255, 255, 255;
+  background-color: var(--background-dark);
+}
+
+html.dark {
+  background-color: var(--background-dark);
+}
+
+html.dark body {
+  background-color: var(--background-dark);
+  color: #f0f0f0;
+}
+
+/* Typography utilities */
+@layer utilities {
+  .text-display {
+    letter-spacing: -0.025em;
+    font-weight: 600;
+  }
+
+  .text-heading {
+    letter-spacing: -0.01em;
+    font-weight: 500;
+  }
+
+  .text-body {
+    letter-spacing: 0.01em;
+    font-weight: 400;
+  }
+
+  .text-label {
+    letter-spacing: 0.025em;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+}
+
+/* Button ripple effect */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.btn-ripple:focus:not(:active)::after {
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0) translate(-50%, -50%);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(20) translate(-50%, -50%);
+    opacity: 0;
+  }
+}
+
+/* Skeleton loader */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #e0e0e0 25%,
+    #f0f0f0 50%,
+    #e0e0e0 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton 1.5s ease-in-out infinite;
+}
+
+.dark .skeleton {
+  background: linear-gradient(
+    90deg,
+    #2a2a4a 25%,
+    #3a3a5a 50%,
+    #2a2a4a 75%
+  );
+  background-size: 200% 100%;
+}
+
+/* Progress bar */
+.progress-bar {
+  background: linear-gradient(
+    90deg,
+    #4a90e2 0%,
+    #6ba3eb 50%,
+    #4a90e2 100%
+  );
+  background-size: 200% 100%;
+  animation: progress-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes progress-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Icon hover animations */
+.icon-hover {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.icon-hover:hover {
+  transform: scale(1.1);
+}
+
+/* Detection item highlight state */
+.detection-item-highlight {
+  background-color: rgba(74, 144, 226, 0.15) !important;
+  border-left-width: 6px !important;
+  transform: translateX(4px);
+}
+
+.dark .detection-item-highlight {
+  background-color: rgba(74, 144, 226, 0.25) !important;
+}
+
+/* Animated bounding box overlay */
+.bbox-pulse {
+  animation: bbox-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes bbox-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(74, 144, 226, 0);
+  }
+}
+
+/* Smooth panel transitions for dark mode */
+.panel-gradient {
+  background: linear-gradient(145deg, var(--panel-light-start) 0%, var(--panel-light-end) 100%);
+  transition: background 0.3s ease;
+}
+
+.dark .panel-gradient {
+  background: linear-gradient(145deg, var(--panel-dark-start) 0%, var(--panel-dark-end) 100%);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #2a2a4a;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4a4a6a;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #5a5a7a;
+}
