@@ -25,7 +25,7 @@ export default function Navbar() {
             Home
           </Link>
           <Link
-            href="/history"
+            href="/"
             className="hover:text-mira-blue transition-all duration-200 hover:scale-105"
           >
             Case History
