@@ -108,9 +108,6 @@ export default function DetectionResults({ results, imageUrl }: DetectionResults
                     {(detection.confidence * 100).toFixed(1)}%
                   </span>
                 </div>
-                <div className="text-xs text-gray-400 dark:text-gray-500 mt-1 font-mono">
-                  [{detection.bbox.x1.toFixed(0)}, {detection.bbox.y1.toFixed(0)}, {detection.bbox.x2.toFixed(0)}, {detection.bbox.y2.toFixed(0)}]
-                </div>
               </div>
             ))}
           </div>
