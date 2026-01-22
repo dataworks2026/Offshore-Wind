@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { InferenceResponse } from '@/lib/api';
-import BoundingBoxCanvas from './BoundingBoxCanvas';
+import BoundingBoxCanvas, { BoundingBoxCanvasRef } from './BoundingBoxCanvas';
 
 // Color mapping for damage class badges (matches BoundingBoxCanvas)
 const CLASS_COLORS: Record<string, string> = {
@@ -24,6 +24,7 @@ interface DetectionResultsProps {
 export default function DetectionResults({ results, imageUrl }: DetectionResultsProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isRippling, setIsRippling] = useState(false);
+  const canvasRef = useRef<BoundingBoxCanvasRef>(null);
 
   if (!results || !imageUrl) {
     return null;
@@ -34,10 +35,10 @@ export default function DetectionResults({ results, imageUrl }: DetectionResults
     setIsRippling(true);
     setTimeout(() => setIsRippling(false), 600);
 
-    const link = document.createElement('a');
-    link.href = imageUrl;
-    link.download = `detection-result-${Date.now()}.jpg`;
-    link.click();
+    // Download the annotated canvas image
+    if (canvasRef.current) {
+      canvasRef.current.downloadImage();
+    }
   };
 
   return (
@@ -45,6 +46,7 @@ export default function DetectionResults({ results, imageUrl }: DetectionResults
       {/* Image Display with Bounding Boxes */}
       <div className="bg-white dark:bg-gray-800 rounded-xl p-3 mb-6 border-2 border-mira-blue shadow-sm transition-colors duration-300">
         <BoundingBoxCanvas
+          ref={canvasRef}
           imageUrl={imageUrl}
           detections={results.detections}
           highlightedIndex={hoveredIndex}

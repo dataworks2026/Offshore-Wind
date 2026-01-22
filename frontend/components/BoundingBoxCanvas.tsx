@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, forwardRef, useImperativeHandle } from 'react';
 import { Detection } from '@/lib/api';
 
 // Industrial-grade color palette for each damage class
@@ -17,6 +17,10 @@ const CLASS_COLORS: Record<string, { primary: string; secondary: string; glow: s
 
 const DEFAULT_COLOR = { primary: '#00FF00', secondary: '#66FF66', glow: 'rgba(0, 255, 0, 0.4)' };
 
+export interface BoundingBoxCanvasRef {
+  downloadImage: () => void;
+}
+
 interface BoundingBoxCanvasProps {
   imageUrl: string;
   detections: Detection[];
@@ -26,17 +30,35 @@ interface BoundingBoxCanvasProps {
   enablePulse?: boolean;
 }
 
-export default function BoundingBoxCanvas({
+const BoundingBoxCanvas = forwardRef<BoundingBoxCanvasRef, BoundingBoxCanvasProps>(({
   imageUrl,
   detections,
   highlightedIndex = null,
   enablePulse = true
-}: BoundingBoxCanvasProps) {
+}, ref) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0, naturalWidth: 0, naturalHeight: 0 });
   const [pulsePhase, setPulsePhase] = useState(0);
+
+  // Expose download method to parent via ref
+  useImperativeHandle(ref, () => ({
+    downloadImage: () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      canvas.toBlob((blob) => {
+        if (!blob) return;
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `damage-detection-${Date.now()}.png`;
+        link.click();
+        URL.revokeObjectURL(url);
+      }, 'image/png');
+    }
+  }));
 
   useEffect(() => {
     const img = new Image();
@@ -251,4 +273,8 @@ export default function BoundingBoxCanvas({
       />
     </div>
   );
-}
+});
+
+BoundingBoxCanvas.displayName = 'BoundingBoxCanvas';
+
+export default BoundingBoxCanvas;
