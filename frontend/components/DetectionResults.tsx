@@ -6,14 +6,14 @@ import BoundingBoxCanvas, { BoundingBoxCanvasRef } from './BoundingBoxCanvas';
 
 // Color mapping for damage class badges (matches BoundingBoxCanvas)
 const CLASS_COLORS: Record<string, string> = {
-  'Drain hole impairment': '#FF6B6B',
-  'Lightning Strike': '#FFE66D',
-  'OIL LEAKAGE': '#4ECDC4',
-  'PU-tape': '#A66CFF',
-  'Paint': '#FF9F43',
-  'Surface Crack': '#EE5A5A',
-  'dirt': '#8B7355',
-  'le-erosion': '#00D9FF',
+  'Drain hole impairment': '#E74C3C',
+  'Lightning Strike': '#FF8C00',
+  'OIL LEAKAGE': '#00B4A8',
+  'PU-tape': '#8B4FFF',
+  'Paint': '#FF6B35',
+  'Surface Crack': '#E91E63',
+  'dirt': '#8B4513',
+  'le-erosion': '#0099FF',
 };
 
 interface DetectionResultsProps {

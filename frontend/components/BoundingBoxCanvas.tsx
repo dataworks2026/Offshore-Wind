@@ -5,14 +5,14 @@ import { Detection } from '@/lib/api';
 
 // Industrial-grade color palette for each damage class
 const CLASS_COLORS: Record<string, { primary: string; secondary: string; glow: string }> = {
-  'Drain hole impairment': { primary: '#FF6B6B', secondary: '#FF8E8E', glow: 'rgba(255, 107, 107, 0.4)' },
-  'Lightning Strike': { primary: '#FFE66D', secondary: '#FFF0A0', glow: 'rgba(255, 230, 109, 0.4)' },
-  'OIL LEAKAGE': { primary: '#4ECDC4', secondary: '#7EDAD4', glow: 'rgba(78, 205, 196, 0.4)' },
-  'PU-tape': { primary: '#A66CFF', secondary: '#C4A0FF', glow: 'rgba(166, 108, 255, 0.4)' },
-  'Paint': { primary: '#FF9F43', secondary: '#FFB76B', glow: 'rgba(255, 159, 67, 0.4)' },
-  'Surface Crack': { primary: '#EE5A5A', secondary: '#F28585', glow: 'rgba(238, 90, 90, 0.4)' },
-  'dirt': { primary: '#8B7355', secondary: '#A69076', glow: 'rgba(139, 115, 85, 0.4)' },
-  'le-erosion': { primary: '#00D9FF', secondary: '#66E8FF', glow: 'rgba(0, 217, 255, 0.4)' },
+  'Drain hole impairment': { primary: '#E74C3C', secondary: '#FF6B6B', glow: 'rgba(231, 76, 60, 0.5)' },
+  'Lightning Strike': { primary: '#FF8C00', secondary: '#FFA500', glow: 'rgba(255, 140, 0, 0.5)' },
+  'OIL LEAKAGE': { primary: '#00B4A8', secondary: '#00CED1', glow: 'rgba(0, 180, 168, 0.5)' },
+  'PU-tape': { primary: '#8B4FFF', secondary: '#A66CFF', glow: 'rgba(139, 79, 255, 0.5)' },
+  'Paint': { primary: '#FF6B35', secondary: '#FF8555', glow: 'rgba(255, 107, 53, 0.5)' },
+  'Surface Crack': { primary: '#E91E63', secondary: '#FF4081', glow: 'rgba(233, 30, 99, 0.5)' },
+  'dirt': { primary: '#8B4513', secondary: '#A0522D', glow: 'rgba(139, 69, 19, 0.5)' },
+  'le-erosion': { primary: '#0099FF', secondary: '#33AAFF', glow: 'rgba(0, 153, 255, 0.5)' },
 };
 
 const DEFAULT_COLOR = { primary: '#00FF00', secondary: '#66FF66', glow: 'rgba(0, 255, 0, 0.4)' };
