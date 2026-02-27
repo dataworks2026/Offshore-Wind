@@ -56,6 +56,16 @@ CLASS_NAMES = ['Drain hole impairment',
                 'le-erosion']
 
 
+CLASS_NAMES_COASTAL = ['Biological Growth',
+                       'Coating Failure',
+                       'Corrosion',
+                       'Cracking',
+                       'Decay',
+                       'Loss',
+                       'Spalling'
+                       ]
+
+
 # Module-level cache (so repeated calls don't reload weights)
 _MODEL: Optional[YOLO] = None
 _MODEL_PATH: Optional[str] = None
@@ -247,6 +257,57 @@ def predict(
 
     summary_lines = [f"Total detections: {total}"]
     summary_lines += [f"{name}: {counts[name]}" for name in CLASS_NAMES]
+    summary = "\n".join(summary_lines)
+
+    return annotated_rgb, summary
+
+
+
+def predict_coastal(
+    image: ImageLike,
+    model_path: Optional[Union[str, Path]] = None,
+    imgsz: int = 640,
+    conf: float = 0.25,
+    iou: float = 0.45,
+) -> Tuple[np.ndarray, str]:
+    """
+    Deployment contract:
+      returns (annotated_rgb, summary_text)
+
+    Always returns both outputs even if there are 0 detections.
+    """
+    model = load_model(model_path=model_path)
+
+    results = model.predict(
+        source=image,
+        imgsz=imgsz,
+        conf=conf,
+        iou=iou,
+        verbose=False,
+    )
+    res = results[0]
+
+    # annotated image (BGR from Ultralytics) -> RGB
+    annotated_bgr = res.plot()  # returns annotated image :contentReference[oaicite:1]{index=1}
+    annotated_rgb = annotated_bgr[:, :, ::-1]
+
+    # build summary
+    dets = predict_detections(image, model_path=model_path, imgsz=imgsz, conf=conf, iou=iou)
+    total = len(dets)
+
+    # if total == 0:
+    #     summary = "0 detections"
+    #     return annotated_rgb, summary
+
+    # optional: include per-class counts (nice for debugging)
+    counts = {name: 0 for name in CLASS_NAMES_COASTAL}
+    for d in dets:
+        cid = int(d["cls"])
+        if 0 <= cid < len(CLASS_NAMES_COASTAL):
+            counts[CLASS_NAMES_COASTAL[cid]] += 1
+
+    summary_lines = [f"Total detections: {total}"]
+    summary_lines += [f"{name}: {counts[name]}" for name in CLASS_NAMES_COASTAL]
     summary = "\n".join(summary_lines)
 
     return annotated_rgb, summary

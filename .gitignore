@@ -20,3 +20,6 @@ __pycache__/
 *.tar
 *.tar.gz
 *.rar
+
+datasets/
+models/
